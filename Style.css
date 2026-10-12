@@ -1,0 +1,130 @@
+:root {
+  --primary: #000000;
+  --secondary: #ffffff;
+  --accent: #E74C3C;
+
+  --font-title: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--secondary);
+  color: var(--primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 40px 0 20px;
+}
+
+.hero-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 20px 0;
+  object-fit: cover;
+}
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.section {
+  padding: 60px 20px;
+}
+
+.number {
+  font-size: 2rem;
+  font-family: var(--font-title);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.label {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.contact-container {
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-card {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  max-width: 700px;
+  width: 100%;
+}
+
+.subtitle {
+  color: #777;
+  margin-bottom: 30px;
+}
+
+.custom-input {
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  transition: 0.3s;
+}
+
+.custom-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.15);
+}
+
+.form-check-label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.btn-cta {
+  background-color: var(--accent);
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-cta:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+
+
+.login-container {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.login-card {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-card h1 {
+  margin-bottom: 10px;
+}

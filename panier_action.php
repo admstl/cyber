@@ -68,9 +68,6 @@ if ($action === 'valider') {
 
     $_SESSION['panier'] = [];
 
-    header("Location: index.php?page=panier&succes=1");
+    header("Location: index.php?page=commande_succes&num=" . $noCommande);
     exit();
 }
-
-header("Location: index.php");
-exit();

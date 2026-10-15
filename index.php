@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $pages_autorisees = ['accueil', 'produit', 'contact', 'connexion', 'connexion_client', 'inscription_client', 'admin', 'detailproduit', 'apropos', 'mention', 'panier'];
 
 $page = $_GET["page"] ?? 'accueil';

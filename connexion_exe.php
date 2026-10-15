@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("info_bdd.php");
 
 if(isset($_POST["login"]) && isset($_POST["password"])){

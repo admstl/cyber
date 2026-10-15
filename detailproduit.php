@@ -58,7 +58,9 @@ if (!$produit) {
 
             <div class="mt-4 d-flex gap-2">
 
-                <a href="#" class="btn btn-danger <?php echo ($produit["stock"] == 0) ? 'disabled' : ''; ?>">Ajout au Panier</a>
+                <a href="panier_action.php?action=ajouter&id=<?php echo $produit['numProduit']; ?>" class="btn btn-danger <?php echo ($produit['stock'] == 0) ? 'disabled' : ''; ?>">
+                    Ajout au Panier
+                </a>
 
                 <a href="index.php" class="btn btn-secondary">
                     Retour

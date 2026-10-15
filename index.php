@@ -2,7 +2,12 @@
 
 session_start();
 
-$pages_autorisees = ['accueil', 'produit', 'contact', 'connexion', 'connexion_client', 'inscription_client', 'admin', 'detailproduit', 'apropos', 'mention', 'panier'];
+$pages_autorisees = [
+    'accueil', 'produit', 'contact', 'connexion', 
+    'connexion_client', 'inscription_client', 'admin', 
+    'detailproduit', 'apropos', 'mention', 'panier', 
+    'commande_succes'
+];
 
 $page = $_GET["page"] ?? 'accueil';
 
@@ -21,4 +26,3 @@ include($page . ".php");
 <?php
 include("footer.php");
 ?>
-

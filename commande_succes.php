@@ -21,7 +21,7 @@ $numCommande = isset($_GET['num']) ? (int)$_GET['num'] : 0;
         <?php endif; ?>
 
         <p class="text-secondary small">
-            Un e-mail récapitulatif vient de vous être envoyé. Notre équipe prépare votre colis pour une expédition en 24-48h.
+            Notre équipe prépare votre colis pour une expédition en 24-48h.
         </p>
 
         <div class="d-flex justify-content-center gap-3 mt-4">

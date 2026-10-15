@@ -1,24 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Smart Phone</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="Style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400&display=swap" rel="stylesheet">
 </head>
 
 <?php
-$tmpPath = __DIR__ . '/tmp';
-if (is_dir($tmpPath)) {
-    session_save_path($tmpPath);
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
-session_start();
 ?>
 
 <body>
@@ -61,27 +58,28 @@ session_start();
                     <input class="form-control form-control-sm" type="search" placeholder="Rechercher...">
 
                     <?php if (isset($_SESSION['login'])): ?>
-                        <!-- Utilisateur connecté -->
-                        <span class="text-dark fw-semibold">
+                        <!-- Lien vers la page Mon Compte -->
+                        <a href="index.php?page=compte" class="btn btn-outline-dark btn-sm text-decoration-none">
                             <i class="bi bi-person-circle"></i> <?php echo htmlspecialchars($_SESSION['login']); ?>
-                        </span>
+                        </a>
 
                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'adm'): ?>
                             <a href="index.php?page=admin" class="btn btn-outline-warning btn-sm">Admin</a>
                         <?php endif; ?>
 
-                        <a href="deconnexion.php" class="btn btn-outline-secondary btn-sm" title="Se déconnecter">
+                        <!-- Déconnexion -->
+                        <a href="deconnexion.php" class="btn btn-outline-danger btn-sm" title="Se déconnecter">
                             <i class="bi bi-box-arrow-right"></i> Déconnexion
                         </a>
 
                     <?php else: ?>
-                        <!-- Visiteur non connecté -->
+                        <!-- Connexion -->
                         <a href="index.php?page=connexion_client" class="btn btn-outline-dark btn-sm">
                             <i class="bi bi-person"></i> Connexion
                         </a>
                     <?php endif; ?>
 
-                    <!-- Bouton Panier avec badge du nombre d'articles -->
+                    <!-- Panier -->
                     <?php
                     $nbArticles = !empty($_SESSION['panier']) ? array_sum($_SESSION['panier']) : 0;
                     ?>

@@ -1,24 +1,30 @@
 <?php
+session_start(); 
+
 require_once("info_bdd.php");
 
-if(isset($_POST["pseudo"]) && isset($_POST["password"])){
+if (!empty($_POST["pseudo"]) && !empty($_POST["password"])) {
 
     $nom = $_POST["pseudo"];
     $mdp = $_POST["password"];
 
-    $requete = "SELECT login, role, mdp FROM users where login='$nom' and mdp='$mdp';";
-    $reponse = $mon_pdo->query($requete);
-    $resultat = $reponse->fetch(PDO::FETCH_ASSOC);
+    // 2. On utilise des marqueurs (?) pour éviter les injections SQL
+    $requete = "SELECT login, role, mdp FROM users WHERE login = ?;";
+    $stmt = $mon_pdo->prepare($requete);
+    $stmt->execute([$nom]);
+    $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($resultat){
-        $_SESSION['login'] = $nom;
+    if ($resultat && password_verify($mdp, $resultat['mdp'])) {
+        
+        session_regenerate_id(true); 
+        
+        $_SESSION['login'] = $resultat['login'];
         $_SESSION['role'] = $resultat['role'];
 
-        header("location:index.php?page=admin");
+        header("Location: index.php?page=admin");
         exit();
-    } 
-    else {
-        header("location:index.php?page=connexion&&erreur=Echec De Connexion");
+    } else {
+        header("Location: index.php?page=connexion&erreur=Echec%20De%20Connexion");
         exit();
     }
 }

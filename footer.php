@@ -21,6 +21,9 @@
                 <a class="d-block text-secondary text-decoration-none" href="index.php?page=mention">
                     Mentions légales
                 </a>
+                <a class="d-block text-secondary text-decoration-none" href="index.php?page=connexion">
+                    Connexion Admin
+                </a>
             </div>
 
             <div class="col-md-3 mb-3">

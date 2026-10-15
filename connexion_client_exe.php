@@ -18,7 +18,6 @@ if (!empty($_POST["pseudo"]) && !empty($_POST["mdp"])) {
 
         $_SESSION['login'] = $resultat['pseudo'];
 
-        // ICI : on garde son identifiant client
         $_SESSION['idClient'] = $resultat['idClient'];
 
         header("Location: index.php?page=accueil");

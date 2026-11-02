@@ -1,0 +1,19 @@
+# Dépendances
+/vendor/
+
+# Fichiers d'environnement
+.env
+.env.local
+.env.*.local
+
+# Logs et cache
+/var/log/*
+/var/cache/*
+/storage/logs/*
+/storage/framework/cache/*
+/tmp/
+*.log
+
+# Tests et couverture
+/coverage/
+.phpunit.result.cache

@@ -1,48 +1,81 @@
+<div class="login-container">
 
-<h1 class="m-3 text-center text-white p-3 rounded" style="background-color: #000000;">
-    Inscription
-</h1>
+    <div class="login-card shadow" style="max-width: 520px;">
 
-<div class="card shadow mt-2 p-3 w-50 mx-auto">
-    <form action="inscription_client_exe.php" method="POST">
-        <div class="row mb-3">
-            <div class="col">
-                <label for="pseudo" class="form-label">Login</label>
-                <input type="text" class="form-control" id="pseudo" name="pseudo" required>
+        <h1>Inscription</h1>
+        <p class="subtitle">Créez votre compte client</p>
+
+        <?php if (isset($_GET["erreur"])) { ?>
+            <!-- htmlspecialchars : le message vient de l'URL, il ne doit jamais être affiché brut (XSS) -->
+            <div class="alert alert-warning" role="alert">
+                <?php echo htmlspecialchars($_GET["erreur"]); ?>
             </div>
-            <div class="col">
-                <label for="mdp" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="mdp" name="mdp" required>
+        <?php } ?>
+
+        <form action="inscription_client_exe.php" method="POST">
+
+            <div class="mb-3">
+                <label for="pseudo" class="form-label">Pseudo *</label>
+                <input type="text" class="form-control custom-input" id="pseudo" name="pseudo" placeholder="Votre pseudo" required>
             </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="mdp" class="form-label">Mot de passe *</label>
+                    <input type="password" class="form-control custom-input" id="mdp" name="mdp" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="mdp2" class="form-label">Confirmer *</label>
+                    <input type="password" class="form-control custom-input" id="mdp2" name="mdp2" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="nom" class="form-label">Nom *</label>
+                    <input type="text" class="form-control custom-input" id="nom" name="nom" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="prenom" class="form-label">Prénom *</label>
+                    <input type="text" class="form-control custom-input" id="prenom" name="prenom" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="mail" class="form-label">Mail <span class="text-muted">(facultatif)</span></label>
+                <input type="email" class="form-control custom-input" id="mail" name="mail" placeholder="votre@mail.com">
+            </div>
+
+            <div class="mb-3">
+                <label for="telephone" class="form-label">Téléphone <span class="text-muted">(facultatif)</span></label>
+                <input type="text" class="form-control custom-input" id="telephone" name="telephone">
+            </div>
+
+            <!-- Droit à l'information (RGPD art. 13) : finalité + lien vers la politique -->
+            <p class="small text-muted text-start">
+                Vos données servent à créer votre compte et traiter vos commandes. Vous pouvez y accéder,
+                les rectifier ou les supprimer en nous contactant.
+                <a href="index.php?page=confidentialite" target="_blank">Politique de confidentialité</a>
+            </p>
+
+            <div class="form-check text-start mb-3">
+                <input type="checkbox" class="form-check-input" id="consentement" name="consentement" value="1" required>
+                <label class="form-check-label" for="consentement">
+                    J'ai lu la politique de confidentialité et j'accepte le traitement de mes données *
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-cta w-100">Créer mon compte</button>
+
+        </form>
+
+        <div class="text-center mt-3">
+            <span class="text-muted">Déjà un compte ?</span><br>
+            <a href="index.php?page=connexion_client" class="signup-link">
+                Se connecter
+            </a>
         </div>
-        <div class="row mb-3">
-            <div class="col">
-                <label for="mdp2" class="form-label">Confirmer le mot de passe</label>
-                <input type="password" class="form-control" id="mdp2" name="mdp2" required>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col">
-                <label for="nom" class="form-label">Nom</label>
-                <input type="text" class="form-control" id="nom" name="nom" required>
-            </div>
-            <div class="col">
-                <label for="prenom" class="form-label">Prénom</label>
-                <input type="text" class="form-control" id="prenom" name="prenom" required>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col">
-                <label for="mail" class="form-label">Mail</label>
-                <input type="email" class="form-control" id="mail" name="mail">
-            </div>
-            <div class="col">
-                <label for="telephone" class="form-label">Téléphone</label>
-                <input type="text" class="form-control" id="telephone" name="telephone">
-            </div>
-        </div>
-        <div class="mb-3 text-center">
-            <button type="submit" class="btn btn-primary">Valider</button>
-        </div>
-    </form>
+
+    </div>
+
 </div>

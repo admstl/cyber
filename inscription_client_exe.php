@@ -2,6 +2,11 @@
 session_start();
 require_once("info_bdd.php");
 
+if (empty($_POST["consentement"])) {
+    header("Location: index.php?page=inscription_client&erreur=Vous%20devez%20accepter%20la%20politique%20de%20confidentialite");
+    exit();
+}
+
 if (
     !empty($_POST["nom"]) &&
     !empty($_POST["prenom"]) &&
@@ -11,11 +16,10 @@ if (
     $nom = trim($_POST["nom"]);
     $prenom = trim($_POST["prenom"]);
     $pseudo = trim($_POST["pseudo"]);
-    $mdp = trim($_POST["mdp"]);
+    $mdp = $_POST["mdp"];
     $mail = !empty($_POST["mail"]) ? trim($_POST["mail"]) : null;
     $telephone = !empty($_POST["telephone"]) ? trim($_POST["telephone"]) : null;
 
-    // 2. Vérifier si le pseudo existe déjà dans la table client
     $verifSQL = "SELECT idClient FROM client WHERE pseudo = ?";
     $stmtVerif = $mon_pdo->prepare($verifSQL);
     $stmtVerif->execute([$pseudo]);
@@ -25,10 +29,25 @@ if (
         exit();
     }
 
+    $mdpHache      = hasher_mdp($mdp);
+    $nomChiffre    = chiffrer_donnee($nom, $cle_chiffrement);
+    $prenomChiffre = chiffrer_donnee($prenom, $cle_chiffrement);
+    $mailChiffre   = chiffrer_donnee($mail, $cle_chiffrement);
+    $telChiffre    = chiffrer_donnee($telephone, $cle_chiffrement);
+
     $insertSQL = "INSERT INTO client (nom, prenom, pseudo, mdp, mail, telephone) 
                   VALUES (?, ?, ?, ?, ?, ?)";
     $stmtInsert = $mon_pdo->prepare($insertSQL);
-    $stmtInsert->execute([$nom, $prenom, $pseudo, $mdp, $mail, $telephone]);
+
+    try {
+        $stmtInsert->execute([$nomChiffre, $prenomChiffre, $pseudo, $mdpHache, $mailChiffre, $telChiffre]);
+    } catch (PDOException $e) {
+        if ($e->getCode() === '23000') {
+            header("Location: index.php?page=inscription_client&erreur=Ce%20pseudo%20est%20déjà%20utilisé");
+            exit();
+        }
+        throw $e;
+    }
 
     $idClient = $mon_pdo->lastInsertId();
 

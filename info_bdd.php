@@ -1,10 +1,11 @@
 <?php
+require_once __DIR__ . '/gestion_secrets.php';
 
-$host = '10.29.60.7';
-$port = '3306';
-$dbname = 'la-zone';
-$username = 'dev';
-$password = 'dev123';
+$host     = getenv('DB_HOST');
+$port     = getenv('DB_PORT');
+$dbname   = getenv('DB_NAME');
+$username = getenv('DB_USER');
+$password = getenv('DB_PASSWORD');
 
 try {
     $pdo = new PDO(
@@ -17,6 +18,7 @@ try {
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]
     );
+
     $mon_pdo = $pdo;
 
     $connexion = $pdo;
@@ -25,7 +27,8 @@ try {
     $conn = $pdo;
 
 } catch (PDOException $e) {
-    die("Connexion impossible : " . $e->getMessage());
-}
 
-?>
+    error_log("Connexion BDD impossible : " . $e->getMessage());
+    http_response_code(500);
+    die("Service momentanément indisponible.");
+}

@@ -1,0 +1,9 @@
+{
+    "name": "admstl/cyber",
+    "description": "Site marchand Smart Phone - TP cybersécurité BTS SIO",
+    "require": {
+        "php": ">=8.0",
+        "ext-openssl": "*",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

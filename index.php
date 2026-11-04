@@ -6,7 +6,7 @@ $pages_autorisees = [
     'accueil', 'produit', 'contact', 'connexion', 
     'connexion_client', 'inscription_client', 'admin', 
     'detailproduit', 'apropos', 'mention', 'panier', 
-    'commande_succes', 'compte'
+    'commande_succes', 'compte', 'confidentialite'
 ];
 
 $page = $_GET["page"] ?? 'accueil';

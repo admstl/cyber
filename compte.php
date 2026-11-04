@@ -11,7 +11,6 @@ if (!isset($_SESSION['idClient'])) {
 
 $idClient = $_SESSION['idClient'];
 
-// 1. Coordonnées client & adresse
 $reqClient = $mon_pdo->prepare("
     SELECT c.nom, c.prenom, c.pseudo, c.mail, c.telephone,
            a.rue, a.codePostal, a.ville
@@ -22,6 +21,13 @@ $reqClient = $mon_pdo->prepare("
 ");
 $reqClient->execute([$idClient]);
 $client = $reqClient->fetch(PDO::FETCH_ASSOC);
+
+if ($client) {
+    $client['nom']       = dechiffrer_donnee($client['nom'], $cle_chiffrement);
+    $client['prenom']    = dechiffrer_donnee($client['prenom'], $cle_chiffrement);
+    $client['mail']      = dechiffrer_donnee($client['mail'], $cle_chiffrement);
+    $client['telephone'] = dechiffrer_donnee($client['telephone'], $cle_chiffrement);
+}
 
 // 2. Commandes
 $reqCommandes = $mon_pdo->prepare("
@@ -39,7 +45,6 @@ $commandes = $reqCommandes->fetchAll(PDO::FETCH_ASSOC);
     <h2 class="fw-bold mb-4">Mon compte</h2>
 
     <div class="row g-4">
-        <!-- Infos perso -->
         <div class="col-md-4">
             <div class="p-4 border rounded bg-white">
                 <h5 class="fw-bold mb-3">Mes coordonnées</h5>
@@ -48,9 +53,14 @@ $commandes = $reqCommandes->fetchAll(PDO::FETCH_ASSOC);
                 <p class="mb-1 text-muted"><?php echo htmlspecialchars($client['mail'] ?? 'Non renseigné'); ?></p>
                 <p class="mb-3 text-muted"><?php echo htmlspecialchars($client['telephone'] ?? 'Non renseigné'); ?></p>
             </div>
+
+            <div class="p-3 border rounded bg-white mt-3 small text-muted">
+                <strong>Vos données, vos droits</strong><br>
+                Vous pouvez demander l'accès, la rectification ou la suppression de vos données.
+                <a href="index.php?page=confidentialite">Voir la politique de confidentialité</a>.
+            </div>
         </div>
 
-        <!-- Commandes directes -->
         <div class="col-md-8">
             <h5 class="fw-bold mb-3">Mes commandes</h5>
 

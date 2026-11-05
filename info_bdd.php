@@ -1,12 +1,14 @@
 <?php
 require_once __DIR__ . '/gestion_secrets.php';
 
+# Récupération des données dans le fichier env et définition des variables avec
 $host     = getenv('DB_HOST');
 $port     = getenv('DB_PORT');
 $dbname   = getenv('DB_NAME');
 $username = getenv('DB_USER');
 $password = getenv('DB_PASSWORD');
 
+# Connexion a la BDD
 try {
     $pdo = new PDO(
         "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4",
@@ -25,8 +27,10 @@ try {
     $bdd = $pdo;
     $db = $pdo;
     $conn = $pdo;
+} 
 
-} catch (PDOException $e) {
+# Si connexion a la BDD échoue affichage d'un message d'erreur
+catch (PDOException $e) {
 
     error_log("Connexion BDD impossible : " . $e->getMessage());
     http_response_code(500);

@@ -12,7 +12,7 @@ if(isset($_POST["login"]) && isset($_POST["password"])){
     $stmt->execute([$nom]);
     $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($resultat && verifier_mdp($mdp, $resultat['mdp'])){
+    if ($resultat && $mdp === $resultat['mdp']) {
         session_regenerate_id(true);
         $_SESSION['login'] = $resultat['login'];
         $_SESSION['role'] = $resultat['role'];

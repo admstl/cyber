@@ -29,18 +29,14 @@ if (
         exit();
     }
 
-    $mdpHache      = hasher_mdp($mdp);
-    $nomChiffre    = chiffrer_donnee($nom, $cle_chiffrement);
-    $prenomChiffre = chiffrer_donnee($prenom, $cle_chiffrement);
-    $mailChiffre   = chiffrer_donnee($mail, $cle_chiffrement);
-    $telChiffre    = chiffrer_donnee($telephone, $cle_chiffrement);
+    $stmtInsert->execute([$nom, $prenom, $pseudo, $mdp, $mail, $telephone]);
 
     $insertSQL = "INSERT INTO client (nom, prenom, pseudo, mdp, mail, telephone) 
                   VALUES (?, ?, ?, ?, ?, ?)";
     $stmtInsert = $mon_pdo->prepare($insertSQL);
 
     try {
-        $stmtInsert->execute([$nomChiffre, $prenomChiffre, $pseudo, $mdpHache, $mailChiffre, $telChiffre]);
+        $stmtInsert->execute([$nom, $prenom, $pseudo, $mdp, $mail, $telephone]);
     } catch (PDOException $e) {
         if ($e->getCode() === '23000') {
             header("Location: index.php?page=inscription_client&erreur=Ce%20pseudo%20est%20déjà%20utilisé");

@@ -13,7 +13,7 @@ if (!empty($_POST["pseudo"]) && !empty($_POST["mdp"])) {
     $stmt->execute([$nom]);
     $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($resultat && verifier_mdp($mdp, $resultat['mdp'])) {
+    if ($resultat && $mdp === $resultat['mdp']) {
         session_regenerate_id(true);
 
         $_SESSION['login'] = $resultat['pseudo'];
@@ -25,5 +25,5 @@ if (!empty($_POST["pseudo"]) && !empty($_POST["mdp"])) {
     }
 }
 
-header("Location: index.php?page=connexion_client&erreur=Echec%20De%20Connexion");
+header("location:index.php?page=connexion_client&erreur=Echec%20De%20Connexion");
 exit();

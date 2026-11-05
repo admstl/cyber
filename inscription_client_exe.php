@@ -3,7 +3,7 @@ session_start();
 require_once("info_bdd.php");
 
 if (empty($_POST["consentement"])) {
-    header("Location: index.php?page=inscription_client&erreur=Vous%20devez%20accepter%20la%20politique%20de%20confidentialite");
+    header("location:index.php?page=inscription_client&erreur=Vous%20devez%20accepter%20la%20politique%20de%20confidentialite");
     exit();
 }
 
@@ -25,7 +25,7 @@ if (
     $stmtVerif->execute([$pseudo]);
 
     if ($stmtVerif->fetch()) {
-        header("Location: index.php?page=inscription_client&erreur=Ce%20pseudo%20est%20déjà%20utilisé");
+        header("location:index.php?page=inscription_client&erreur=Ce%20pseudo%20est%20déjà%20utilisé");
         exit();
     }
 
@@ -51,10 +51,10 @@ if (
     $_SESSION['idClient'] = $idClient;
     $_SESSION['role'] = 'client';
 
-    header("Location: index.php?page=accueil&succes=Inscription%20reussie");
+    header("location:index.php?page=accueil&succes=Inscription%20reussie");
     exit();
 
 } else {
-    header("Location: index.php?page=inscription_client&erreur=Veuillez%20remplir%20tous%20les%20champs%20obligatoires");
+    header("location:index.php?page=inscription_client&erreur=Veuillez%20remplir%20tous%20les%20champs%20obligatoires");
     exit();
 }

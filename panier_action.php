@@ -15,7 +15,7 @@ if ($action === 'ajouter' && $id > 0) {
     } else {
         $_SESSION['panier'][$id] = 1;
     }
-    header("Location: index.php?page=panier");
+    header("location:index.php?page=panier");
     exit();
 }
 
@@ -26,36 +26,36 @@ if ($action === 'moins' && $id > 0) {
             unset($_SESSION['panier'][$id]);
         }
     }
-    header("Location: index.php?page=panier");
+    header("location:index.php?page=panier");
     exit();
 }
 
 if ($action === 'supprimer' && $id > 0) {
     unset($_SESSION['panier'][$id]);
-    header("Location: index.php?page=panier");
+    header("location:index.php?page=panier");
     exit();
 }
 
 if ($action === 'vider') {
     $_SESSION['panier'] = [];
-    header("Location: index.php?page=panier");
+    header("location:index.php?page=panier");
     exit();
 }
 
 if ($action === 'valider') {
     if (empty($_SESSION['panier'])) {
-        header("Location: index.php?page=panier");
+        header("location:index.php?page=panier");
         exit();
     }
 
     if (!isset($_SESSION['idClient'])) {
-        header("Location: index.php?page=connexion_client&erreur=Connectez-vous pour commander");
+        header("location:index.php?page=connexion_client&erreur=Connectez-vous pour commander");
         exit();
     }
 
     $idClient = $_SESSION['idClient'];
     $date = date('Y-m-d');
-    $idStatut = 'ENC'; // Code statut (pense à en insérer un dans ta table statut si besoin)
+    $idStatut = 'ENC';
 
     $reqCmd = $mon_pdo->prepare("INSERT INTO commande (idClient, idStatut, dateCommande) VALUES (?, ?, ?)");
     $reqCmd->execute([$idClient, $idStatut, $date]);
@@ -68,6 +68,6 @@ if ($action === 'valider') {
 
     $_SESSION['panier'] = [];
 
-    header("Location: index.php?page=commande_succes&num=" . $noCommande);
+    header("location:index.php?page=commande_succes&num=" . $noCommande);
     exit();
 }

@@ -4,13 +4,14 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require_once("info_bdd.php");
 
+// Si dans la session l'id client et vide alors ça redirige vers la page de connexion
 if (!isset($_SESSION['idClient'])) {
     header("Location: index.php?page=connexion_client&erreur=Veuillez vous connecter");
     exit();
 }
 
 $idClient = $_SESSION['idClient'];
-
+// Requete sur les information du client
 $reqClient = $mon_pdo->prepare("
     SELECT c.nom, c.prenom, c.pseudo, c.mail, c.telephone,
            a.rue, a.codePostal, a.ville
@@ -22,14 +23,7 @@ $reqClient = $mon_pdo->prepare("
 $reqClient->execute([$idClient]);
 $client = $reqClient->fetch(PDO::FETCH_ASSOC);
 
-if ($client) {
-    $client['nom']       = dechiffrer_donnee($client['nom'], $cle_chiffrement);
-    $client['prenom']    = dechiffrer_donnee($client['prenom'], $cle_chiffrement);
-    $client['mail']      = dechiffrer_donnee($client['mail'], $cle_chiffrement);
-    $client['telephone'] = dechiffrer_donnee($client['telephone'], $cle_chiffrement);
-}
-
-// 2. Commandes
+// Requete sur les commandes
 $reqCommandes = $mon_pdo->prepare("
     SELECT cmd.noCommande, cmd.dateCommande, s.libelleStatut
     FROM commande cmd

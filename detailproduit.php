@@ -17,11 +17,9 @@ if (!$produit) {
     exit;
 }
 ?>
-
+<!-- Affichage de tout les informations du produit -->
 <div class="container mt-5">
-
     <div class="row g-4 align-items-center">
-
         <!-- IMAGE -->
         <div class="col-md-6">
             <div class="card shadow border-0">
@@ -65,11 +63,7 @@ if (!$produit) {
                 <a href="index.php" class="btn btn-secondary">
                     Retour
                 </a>
-
             </div>
-
         </div>
-
     </div>
-
 </div>

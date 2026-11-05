@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 require_once("info_bdd.php");
 
@@ -12,6 +11,7 @@ if(isset($_POST["login"]) && isset($_POST["password"])){
     $stmt->execute([$nom]);
     $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    // Si le pseudo et le mdp correspond a ce qui et en bdd alors le pseudo et l'id et garder en session et redirige vers l'accueil
     if ($resultat && $mdp === $resultat['mdp']) {
         session_regenerate_id(true);
         $_SESSION['login'] = $resultat['login'];

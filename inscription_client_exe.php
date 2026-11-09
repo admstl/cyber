@@ -24,26 +24,16 @@ if (
     $stmtVerif = $mon_pdo->prepare($verifSQL);
     $stmtVerif->execute([$pseudo]);
 
-    if ($stmtVerif->fetch()) {
+        if ($stmtVerif->fetch()) {
         header("location:index.php?page=inscription_client&erreur=Ce%20pseudo%20est%20déjà%20utilisé");
         exit();
     }
-
-    $stmtInsert->execute([$nom, $prenom, $pseudo, $mdp, $mail, $telephone]);
 
     $insertSQL = "INSERT INTO client (nom, prenom, pseudo, mdp, mail, telephone) 
                   VALUES (?, ?, ?, ?, ?, ?)";
     $stmtInsert = $mon_pdo->prepare($insertSQL);
 
-    try {
-        $stmtInsert->execute([$nom, $prenom, $pseudo, $mdp, $mail, $telephone]);
-    } catch (PDOException $e) {
-        if ($e->getCode() === '23000') {
-            header("Location: index.php?page=inscription_client&erreur=Ce%20pseudo%20est%20déjà%20utilisé");
-            exit();
-        }
-        throw $e;
-    }
+    $stmtInsert->execute([$nom, $prenom, $pseudo, $mdp, $mail, $telephone]);
 
     $idClient = $mon_pdo->lastInsertId();
 

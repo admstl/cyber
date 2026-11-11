@@ -21,11 +21,6 @@ try {
 
     $mon_pdo = $pdo;
 
-    $connexion = $pdo;
-    $bdd = $pdo;
-    $db = $pdo;
-    $conn = $pdo;
-
 } catch (PDOException $e) {
 
     error_log("Connexion BDD impossible : " . $e->getMessage());

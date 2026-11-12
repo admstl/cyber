@@ -6,7 +6,7 @@
 .env.local
 .env.*.local
 
-Fichier VSCode/Mac
+# Fichiers VSCode/Mac
 .vscode
 .DS_Store
 

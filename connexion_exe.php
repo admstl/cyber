@@ -20,6 +20,7 @@ if(isset($_POST["login"]) && isset($_POST["password"])){
         header("location:index.php?page=admin");
         exit();
     }
+    // Sinon redirection vers la page de connexion avec l'erreur : Echec De Connexion
     else {
         header("location:index.php?page=connexion&&erreur=Echec De Connexion");
         exit();

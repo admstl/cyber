@@ -72,7 +72,6 @@ $commandes = $reqCommandes->fetchAll(PDO::FETCH_ASSOC);
                     ");
                     $reqArticles->execute([$cmd['noCommande']]);
                     $articles = $reqArticles->fetchAll(PDO::FETCH_ASSOC);
-
                     $total = 0;
                 ?>
                     <div class="border rounded bg-white p-3 mb-3">

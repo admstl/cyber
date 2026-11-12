@@ -26,7 +26,7 @@ try {
     $bdd = $pdo;
     $db = $pdo;
     $conn = $pdo;
-} 
+}
 
 // Si connexion a la BDD échoue affichage d'un message d'erreur
 catch (PDOException $e) {

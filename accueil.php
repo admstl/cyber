@@ -14,7 +14,6 @@
 </div>
 <div class="container section">
     <div class="row text-center">
-
         <div class="col-md-4">
             <h3>Livraison rapide</h3>
             <p>Expédition en 24-48h partout en France.</p>
@@ -29,6 +28,5 @@
             <h3>Paiement sécurisé</h3>
             <p>Transactions 100% protégées.</p>
         </div>
-
     </div>
 </div>

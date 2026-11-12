@@ -15,8 +15,7 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-}
-?>
+}?>
 
 <body>
     <nav class="navbar navbar-expand-lg bg-white border-bottom">

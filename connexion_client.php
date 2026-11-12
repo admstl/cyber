@@ -1,5 +1,4 @@
 <div class="login-container">
-
     <div class="login-card shadow">
 
         <h1>Connexion</h1>
@@ -36,7 +35,5 @@
                 Créer un compte
             </a>
         </div>
-
     </div>
-
 </div>

@@ -31,19 +31,19 @@ if (!$produit) {
         </div>
 
         <div class="col-md-6">
-
+            <!-- Affichage du nom du produit-->
             <h1 class="fw-bold">
                 <?php echo htmlspecialchars($produit["nomProduit"]); ?>
             </h1>
-
+            <!-- Affichage du prix du produit-->
             <h2 class="text-success mt-3">
                 <?php echo number_format($produit["prixUnitaire"], 2, ',', ' '); ?> €
             </h2>
-
+            <!-- Affichage du description du produit-->
             <p class="mt-3 text-muted">
                 <?php echo nl2br(htmlspecialchars($produit["descriptif"])); ?>
             </p>
-
+            <!-- Affichage si le produit et en stock ou non -->
             <?php if ($produit["stock"] > 0) { ?>
                 <p class="text-success">
                     En stock (<?php echo $produit["stock"]; ?> disponibles)

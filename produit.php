@@ -14,7 +14,9 @@ $liste_produits = $reponse->fetchAll(PDO::FETCH_ASSOC);
 <div class="container py-5">
     <h1 class="text-center mb-5">Produits</h1>
     <div class="row g-4">
-        <?php foreach ($liste_produits as $produit) { ?>
+        <?php 
+        // Parcourir les données de la base qui affiche tous les produits
+        foreach ($liste_produits as $produit) { ?>
             <div class="col-md-4">
                 <div class="card h-100 shadow-sm">
                     <img src="./images/<?php echo htmlspecialchars($produit['nomImage']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($produit['nomProduit']); ?>">

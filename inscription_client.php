@@ -1,12 +1,10 @@
 <div class="login-container">
-
     <div class="login-card shadow" style="max-width: 520px;">
 
         <h1>Inscription</h1>
         <p class="subtitle">Créez votre compte client</p>
 
         <?php if (isset($_GET["erreur"])) { ?>
-            <!-- htmlspecialchars : le message vient de l'URL, il ne doit jamais être affiché brut (XSS) -->
             <div class="alert alert-warning" role="alert">
                 <?php echo htmlspecialchars($_GET["erreur"]); ?>
             </div>
@@ -51,7 +49,6 @@
                 <input type="text" class="form-control custom-input" id="telephone" name="telephone">
             </div>
 
-            <!-- Droit à l'information (RGPD art. 13) : finalité + lien vers la politique -->
             <p class="small text-muted text-start">
                 Vos données servent à créer votre compte et traiter vos commandes. Vous pouvez y accéder,
                 les rectifier ou les supprimer en nous contactant.
@@ -75,7 +72,5 @@
                 Se connecter
             </a>
         </div>
-
     </div>
-
 </div>

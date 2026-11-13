@@ -3,7 +3,7 @@ session_start();
 require_once("info_bdd.php");
 
 if (empty($_POST["consentement"])) {
-    header("Location: index.php?page=inscription_client&erreur=Vous%20devez%20accepter%20la%20politique%20de%20confidentialite");
+    header("location:index.php?page=inscription_client&erreur=Vous%20devez%20accepter%20la%20politique%20de%20confidentialite");
     exit();
 }
 
@@ -24,30 +24,16 @@ if (
     $stmtVerif = $mon_pdo->prepare($verifSQL);
     $stmtVerif->execute([$pseudo]);
 
-    if ($stmtVerif->fetch()) {
-        header("Location: index.php?page=inscription_client&erreur=Ce%20pseudo%20est%20déjà%20utilisé");
+        if ($stmtVerif->fetch()) {
+        header("location:index.php?page=inscription_client&erreur=Ce%20pseudo%20est%20déjà%20utilisé");
         exit();
     }
-
-    $mdpHache      = hasher_mdp($mdp);
-    $nomChiffre    = chiffrer_donnee($nom, $cle_chiffrement);
-    $prenomChiffre = chiffrer_donnee($prenom, $cle_chiffrement);
-    $mailChiffre   = chiffrer_donnee($mail, $cle_chiffrement);
-    $telChiffre    = chiffrer_donnee($telephone, $cle_chiffrement);
 
     $insertSQL = "INSERT INTO client (nom, prenom, pseudo, mdp, mail, telephone) 
                   VALUES (?, ?, ?, ?, ?, ?)";
     $stmtInsert = $mon_pdo->prepare($insertSQL);
 
-    try {
-        $stmtInsert->execute([$nomChiffre, $prenomChiffre, $pseudo, $mdpHache, $mailChiffre, $telChiffre]);
-    } catch (PDOException $e) {
-        if ($e->getCode() === '23000') {
-            header("Location: index.php?page=inscription_client&erreur=Ce%20pseudo%20est%20déjà%20utilisé");
-            exit();
-        }
-        throw $e;
-    }
+    $stmtInsert->execute([$nom, $prenom, $pseudo, $mdp, $mail, $telephone]);
 
     $idClient = $mon_pdo->lastInsertId();
 
@@ -55,10 +41,10 @@ if (
     $_SESSION['idClient'] = $idClient;
     $_SESSION['role'] = 'client';
 
-    header("Location: index.php?page=accueil&succes=Inscription%20reussie");
+    header("location:index.php?page=accueil&succes=Inscription%20reussie");
     exit();
 
 } else {
-    header("Location: index.php?page=inscription_client&erreur=Veuillez%20remplir%20tous%20les%20champs%20obligatoires");
+    header("location:index.php?page=inscription_client&erreur=Veuillez%20remplir%20tous%20les%20champs%20obligatoires");
     exit();
 }

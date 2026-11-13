@@ -28,6 +28,7 @@ $resultat = $reponse->fetchAll();
         </tr>
     </thead>
     <tbody>
+        <!-- Affichage des user avec leur information login, nom, prenom, role -->
         <?php foreach ($resultat as $user) {
         ?>
             <tr>
@@ -36,7 +37,6 @@ $resultat = $reponse->fetchAll();
                 <td><?php echo $user['prenom'] ?></td>
                 <td><?php echo $user['role'] ?></td>
             </tr>
-        <?php }
-        ?>
+        <?php } ?>
     </tbody>
 </table>

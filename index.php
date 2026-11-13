@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 $pages_autorisees = [

@@ -6,6 +6,10 @@
 .env.local
 .env.*.local
 
+# Fichiers VSCode/Mac
+.vscode
+.DS_Store
+
 # Logs et cache
 /var/log/*
 /var/cache/*

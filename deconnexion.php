@@ -1,11 +1,9 @@
 <?php
 session_start();
-
+// Suppression des données mises en session
 unset($_SESSION['login']);
 unset($_SESSION['role']);
 unset($_SESSION['idClient']);
-
-// session_destroy();
-
-header("Location: index.php?page=accueil");
+// Redirection vers la page d'accueil
+header("location:index.php?page=accueil");
 exit();

@@ -17,11 +17,9 @@ if (!$produit) {
     exit;
 }
 ?>
-
+<!-- Affichage de tout les informations du produit -->
 <div class="container mt-5">
-
     <div class="row g-4 align-items-center">
-
         <!-- IMAGE -->
         <div class="col-md-6">
             <div class="card shadow border-0">
@@ -33,19 +31,19 @@ if (!$produit) {
         </div>
 
         <div class="col-md-6">
-
+            <!-- Affichage du nom du produit-->
             <h1 class="fw-bold">
                 <?php echo htmlspecialchars($produit["nomProduit"]); ?>
             </h1>
-
+            <!-- Affichage du prix du produit-->
             <h2 class="text-success mt-3">
                 <?php echo number_format($produit["prixUnitaire"], 2, ',', ' '); ?> €
             </h2>
-
+            <!-- Affichage du description du produit-->
             <p class="mt-3 text-muted">
                 <?php echo nl2br(htmlspecialchars($produit["descriptif"])); ?>
             </p>
-
+            <!-- Affichage si le produit et en stock ou non -->
             <?php if ($produit["stock"] > 0) { ?>
                 <p class="text-success">
                     En stock (<?php echo $produit["stock"]; ?> disponibles)
@@ -65,11 +63,7 @@ if (!$produit) {
                 <a href="index.php" class="btn btn-secondary">
                     Retour
                 </a>
-
             </div>
-
         </div>
-
     </div>
-
 </div>

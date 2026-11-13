@@ -12,8 +12,7 @@ if (!empty($panier)) {
     $ids = implode(',', array_keys($panier));
     $req = $mon_pdo->query("SELECT * FROM produit WHERE numProduit IN ($ids)");
     $produitsPanier = $req->fetchAll(PDO::FETCH_ASSOC);
-}
-?>
+} ?>
 
 <div class="container my-5">
     <h1 class="mb-4">Votre Panier</h1>
@@ -22,9 +21,9 @@ if (!empty($panier)) {
         <div class="alert alert-success">
             Merci ! Votre commande a bien été enregistrée.
         </div>
-    <?php } ?>
+    <?php }
 
-    <?php if (empty($produitsPanier)) { ?>
+    if (empty($produitsPanier)) { ?>
         <p class="text-muted">Votre panier est actuellement vide.</p>
         <a href="index.php?page=produit" class="btn btn-outline-danger">Continuer vos achats</a>
     <?php } else { ?>
@@ -39,11 +38,12 @@ if (!empty($panier)) {
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($produitsPanier as $p) { 
+                <?php
+                // Parcourir les données qui vont afficher les produit mis dans le panier
+                foreach ($produitsPanier as $p) { 
                     $qte = $panier[$p['numProduit']];
                     $sousTotal = $p['prixUnitaire'] * $qte;
-                    $total += $sousTotal;
-                ?>
+                    $total += $sousTotal; ?>
                     <tr>
                         <td>
                             <strong><?php echo htmlspecialchars($p['nomProduit']); ?></strong>

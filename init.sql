@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `client` (
 CREATE TABLE IF NOT EXISTS `users` (
   `codeUser` int(11)     NOT NULL AUTO_INCREMENT,
   `login`    varchar(15) NOT NULL,
-  `mdp`      varchar(255) NOT NULL, -- hash (Partie IV)
+  `mdp`      varchar(255) NOT NULL,
   `nom`      varchar(32) NOT NULL,
   `prenom`   varchar(32) NOT NULL,
   `role`     varchar(3)  NOT NULL DEFAULT 'usr',

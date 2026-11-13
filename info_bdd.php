@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/gestion_secrets.php';
 
-// Récupération des données dans le fichier env et définition des variables avec
+// Récupération des informations de connexion dans le fichier .env avec getenv()
 $host     = getenv('DB_HOST');
 $port     = getenv('DB_PORT');
 $dbname   = getenv('DB_NAME');
@@ -20,12 +20,7 @@ try {
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]
     );
-
     $mon_pdo = $pdo;
-    $connexion = $pdo;
-    $bdd = $pdo;
-    $db = $pdo;
-    $conn = $pdo;
 }
 
 // Si connexion a la BDD échoue affichage d'un message d'erreur

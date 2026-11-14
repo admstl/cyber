@@ -1,10 +1,10 @@
-// Vérifie qu'un mail a un format valide (texte@domaine.extension)
+// Vérifie qu'un mail a un format valide
 function mailValide(mail) {
     let regexMail = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/;
     return mail.length <= 100 && regexMail.test(mail);
 }
 
-// Vérifie qu'un numéro de téléphone français est valide (06 12 34 56 78, 06.12.34.56.78, +33 6 12 34 56 78...)
+// Vérifie qu'un numéro de téléphone français est valide
 function telephoneValide(telephone) {
     // On enlève les espaces, points, tirets et parenthèses avant de vérifier
     let numero = telephone.replace(/[\s.\-()]/g, "");
@@ -12,8 +12,8 @@ function telephoneValide(telephone) {
     return regexTel.test(numero);
 }
 
-// Vérifie les coordonnées du formulaire d'inscription.
-// Retourne true si tout est correct (le formulaire est envoyé), false sinon (l'envoi est bloqué).
+// Vérifie les coordonnées du formulaire d'inscription
+// Retourne true si tout est correct (le formulaire est envoyé) false sinon (l'envoi est bloqué)
 function verifierCoordonnees() {
     let nom = document.getElementById("nom").value.trim();
     let prenom = document.getElementById("prenom").value.trim();
@@ -24,7 +24,7 @@ function verifierCoordonnees() {
     // On vide le message précédent
     message.textContent = "";
 
-    // Nom et prénom : lettres, espace, tiret ou apostrophe, 2 à 50 caractères
+    // Nom et prénom lettres, espace, tiret ou apostrophe 2 à 50 caractères
     let regexNom = /^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ'’ -]{1,49}$/;
     if (!regexNom.test(nom)) {
         message.textContent = "Le nom n'est pas valide (lettres, espace, tiret ou apostrophe, 2 à 50 caractères)";
@@ -35,13 +35,13 @@ function verifierCoordonnees() {
         return false;
     }
 
-    // Le mail est facultatif : on ne le vérifie que s'il est rempli
+    // Le mail est facultatif on ne le vérifie que s'il est rempli
     if (mail !== "" && !mailValide(mail)) {
         message.textContent = "L'adresse e-mail n'est pas valide";
         return false;
     }
 
-    // Le téléphone est facultatif : on ne le vérifie que s'il est rempli
+    // Le téléphone est facultatif on ne le vérifie que s'il est rempli
     if (telephone !== "" && !telephoneValide(telephone)) {
         message.textContent = "Le numéro de téléphone n'est pas valide (format français attendu)";
         return false;
@@ -50,8 +50,7 @@ function verifierCoordonnees() {
     return true;
 }
 
-// Vérifie le mot de passe : 12 caractères minimum, une minuscule, une majuscule, un chiffre,
-// un caractère spécial, et les deux saisies identiques.
+// Vérifie le mot de passe 12 caractères minimum, une minuscule, une majuscule, un chiffre, un caractère spécial et les deux saisies identiques
 function verifierMotDePasse() {
     let pseudo = document.getElementById("pseudo").value.trim();
     let mdp = document.getElementById("mdp").value;

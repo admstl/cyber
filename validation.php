@@ -1,9 +1,5 @@
 <?php
-// Fonctions de nettoyage et de validation des données de l'inscription.
-// Elles sont utilisées par inscription_client_exe.php avant tout envoi à la base de données.
-
-// Nettoie un texte saisi : enlève les espaces au début et à la fin,
-// les caractères de contrôle invisibles et les espaces en double.
+// Nettoie un texte saisi enlève les espaces au début et à la fin
 function nettoyer_texte(string $texte): string
 {
     $texte = trim($texte);
@@ -12,19 +8,19 @@ function nettoyer_texte(string $texte): string
     return $texte;
 }
 
-// Pseudo : 3 à 32 caractères, lettres, chiffres, point, tiret et underscore uniquement.
+// Pseudo 3 à 32 caractères lettres, chiffres, point, tiret et underscore uniquement
 function valider_pseudo(string $pseudo): bool
 {
     return preg_match('/^[A-Za-z0-9_.-]{3,32}$/', $pseudo) === 1;
 }
 
-// Nom ou prénom : 2 à 50 caractères, lettres (accents compris), espace, tiret et apostrophe.
+// Nom ou prénom 2 à 50 caractères, lettres, espace, tiret et apostrophe
 function valider_nom(string $nom): bool
 {
     return preg_match("/^\p{L}[\p{L}'’ -]{1,49}$/u", $nom) === 1;
 }
 
-// Mail : format valide (filter_var), extension d'au moins 2 lettres (.fr, .com...) et 100 caractères maximum.
+// Mail format valide (filter_var), extension d'au moins 2 lettres (.fr, .com) et 100 caractères maximum
 function valider_mail(string $mail): bool
 {
     return strlen($mail) <= 100
@@ -32,8 +28,8 @@ function valider_mail(string $mail): bool
         && preg_match('/\.[A-Za-z]{2,}$/', $mail) === 1;
 }
 
-// Téléphone français : enlève les séparateurs (espaces, points, tirets, parenthèses),
-// accepte le format 06... ou +33 6... et retourne le numéro sous la forme 0612345678.
+// Téléphone français enlève les séparateurs (espaces, points, tirets, parenthèses)
+// accepte le format 06... ou +33 6.. et retourne le numéro sous la forme 0612345678
 // Retourne null si le numéro n'est pas valide.
 function normaliser_telephone(string $telephone): ?string
 {
@@ -44,9 +40,9 @@ function normaliser_telephone(string $telephone): ?string
     return preg_match('/^0[1-9][0-9]{8}$/', $numero) === 1 ? $numero : null;
 }
 
-// Mot de passe : retourne le message d'erreur s'il est trop faible, ou null s'il est valide.
-// Règles : 12 caractères minimum, au moins une minuscule, une majuscule, un chiffre
-// et un caractère spécial, et il ne doit pas contenir le pseudo.
+// Mot de passe retourne le message d'erreur s'il est trop faible ou null s'il est valide
+// Règles 12 caractères minimum, au moins une minuscule, une majuscule, un chiffre
+// et un caractère spécial et il ne doit pas contenir le pseudo
 function verifier_force_mdp(string $mdp, string $pseudo): ?string
 {
     if (strlen($mdp) < 12) {

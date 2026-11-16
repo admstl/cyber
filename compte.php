@@ -3,6 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 require_once("info_bdd.php");
+require_once("gestion_secrets.php");
 
 // Si dans la session l'id client et vide alors ça redirige vers la page de connexion
 if (!isset($_SESSION['idClient'])) {
@@ -33,6 +34,12 @@ $reqCommandes = $mon_pdo->prepare("
 ");
 $reqCommandes->execute([$idClient]);
 $commandes = $reqCommandes->fetchAll(PDO::FETCH_ASSOC);
+
+// Déchiffrement des données personnelles (avec gestion des valeurs vides ou nulles)
+$nomClair = !empty($client['nom']) ? dechiffrer_donnee($client['nom'], $cle_chiffrement) : '';
+$prenomClair = !empty($client['prenom']) ? dechiffrer_donnee($client['prenom'], $cle_chiffrement) : '';
+$mailClair = !empty($client['mail']) ? dechiffrer_donnee($client['mail'], $cle_chiffrement) : 'Non renseigné';
+$telClair = !empty($client['telephone']) ? dechiffrer_donnee($client['telephone'], $cle_chiffrement) : 'Non renseigné';
 ?>
 
 <div class="container my-5">
@@ -42,10 +49,10 @@ $commandes = $reqCommandes->fetchAll(PDO::FETCH_ASSOC);
         <div class="col-md-4">
             <div class="p-4 border rounded bg-white">
                 <h5 class="fw-bold mb-3">Mes coordonnées</h5>
-                <p class="mb-1"><strong><?php echo htmlspecialchars(($client['prenom'] ?? '') . ' ' . ($client['nom'] ?? '')); ?></strong></p>
+                <p class="mb-1"><strong><?php echo htmlspecialchars($prenomClair . ' ' . $nomClair); ?></strong></p>
                 <p class="mb-1 text-muted small">@<?php echo htmlspecialchars($client['pseudo'] ?? ''); ?></p>
-                <p class="mb-1 text-muted"><?php echo htmlspecialchars($client['mail'] ?? 'Non renseigné'); ?></p>
-                <p class="mb-3 text-muted"><?php echo htmlspecialchars($client['telephone'] ?? 'Non renseigné'); ?></p>
+                <p class="mb-1 text-muted"><?php echo htmlspecialchars($mailClair); ?></p>
+                <p class="mb-3 text-muted"><?php echo htmlspecialchars($telClair); ?></p>
             </div>
 
             <div class="p-3 border rounded bg-white mt-3 small text-muted">

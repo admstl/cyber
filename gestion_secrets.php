@@ -10,7 +10,6 @@ $dotenv->required(['HASH_KEY', 'ENCRYPTION_KEY'])->notEmpty();
 // Récupération des clés avec getenv()
 $hash_key = getenv('HASH_KEY');
 $cle_chiffrement = getenv('ENCRYPTION_KEY');
-
 function hasher_mdp(string $mdp): string
 {
     global $hash_key;

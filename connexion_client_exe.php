@@ -1,29 +1,47 @@
 <?php
 session_start();
 require_once("info_bdd.php");
+require_once("validation.php");
 
-if (!empty($_POST["pseudo"]) && !empty($_POST["mdp"])) {
+function retour_connexion_client(): void
+{
+    header("location:index.php?page=connexion_client&erreur=" . urlencode("Echec De Connexion"));
+    exit();
+}
 
-    $nom = $_POST["pseudo"];
-    $mdp = $_POST["mdp"];
+if ($_SERVER["REQUEST_METHOD"] !== "POST"
+    || !isset($_POST["pseudo"], $_POST["mdp"])
+    || !is_string($_POST["pseudo"]) || !is_string($_POST["mdp"])) {
+    retour_connexion_client();
+}
 
-    $requete = "SELECT idClient, pseudo, mdp FROM client WHERE pseudo = ?;";
-    $stmt = $mon_pdo->prepare($requete);
-    $stmt->execute([$nom]);
+// Assainissement (le mot de passe n'est pas nettoyé : les espaces en font partie)
+$pseudo = nettoyer_texte($_POST["pseudo"]);
+$mdp = $_POST["mdp"];
+
+// Vérifications avant l'envoi à la base de données
+// Message volontairement identique à un échec classique on ne révèle pas la règle
+if (!valider_pseudo($pseudo) || $mdp === "" || strlen($mdp) > 128) {
+    retour_connexion_client();
+}
+
+try {
+    $stmt = $mon_pdo->prepare("SELECT idClient, pseudo, mdp FROM client WHERE pseudo = ?");
+    $stmt->execute([$pseudo]);
     $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Si le pseudo et le mdp correspond a ce qui et en bdd alors le pseudo et l'id et garder en session et redirige vers l'accueil
-    if ($resultat && $mdp === $resultat['mdp']) {
+    $hash = $resultat ? $resultat['mdp'] : hasher_mdp('mot_de_passe_factice');
+
+    if (verifier_mdp($mdp, $hash) && $resultat) {
         session_regenerate_id(true);
-
         $_SESSION['login'] = $resultat['pseudo'];
-
         $_SESSION['idClient'] = $resultat['idClient'];
-
+        $_SESSION['role'] = 'client';
         header("location:index.php?page=accueil");
         exit();
     }
+} catch (Throwable $e) {
+    error_log("Connexion client impossible : " . $e->getMessage());
 }
-// Sinon redirection sur la meme page mais avec une erreur de connexion
-header("location:index.php?page=connexion_client&erreur=Echec%20De%20Connexion");
-exit();
+
+retour_connexion_client();

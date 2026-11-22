@@ -17,10 +17,12 @@
 
     <?php
     if (isset($_GET["erreur"])) {
+        // Message d'erreur reçu dans l'URL
         $erreur = $_GET["erreur"];
     ?>
         <div class="alert alert-warning role=alert">
-            <?php echo $erreur ?>
+            <!-- htmlspecialchars empêche l'injection de code dans la page (faille XSS) -->
+            <?php echo htmlspecialchars($erreur) ?>
         </div>
     <?php
     }

@@ -28,13 +28,13 @@ $resultat = $reponse->fetchAll();
         </tr>
     </thead>
     <tbody>
-        <!-- Affichage des user avec leur information login, nom, prenom, role -->
+        <!-- Affichage des user avec leur information login, nom, prenom, role (le nom et le prénom sont chiffrés en base, on les déchiffre pour l'affichage) -->
         <?php foreach ($resultat as $user) {
         ?>
             <tr>
                 <td><?php echo $user['login'] ?></td>
-                <td><?php echo $user['nom'] ?></td>
-                <td><?php echo $user['prenom'] ?></td>
+                <td><?php echo dechiffrer_donnee($user['nom'], $cle_chiffrement) ?></td>
+                <td><?php echo dechiffrer_donnee($user['prenom'], $cle_chiffrement) ?></td>
                 <td><?php echo $user['role'] ?></td>
             </tr>
         <?php } ?>

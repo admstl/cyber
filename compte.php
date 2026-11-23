@@ -49,10 +49,10 @@ $telClair = !empty($client['telephone']) ? dechiffrer_donnee($client['telephone'
         <div class="col-md-4">
             <div class="p-4 border rounded bg-white">
                 <h5 class="fw-bold mb-3">Mes coordonnées</h5>
-                <p class="mb-1"><strong><?php echo htmlspecialchars($prenomClair . ' ' . $nomClair); ?></strong></p>
-                <p class="mb-1 text-muted small">@<?php echo htmlspecialchars($client['pseudo'] ?? ''); ?></p>
-                <p class="mb-1 text-muted"><?php echo htmlspecialchars($mailClair); ?></p>
-                <p class="mb-3 text-muted"><?php echo htmlspecialchars($telClair); ?></p>
+                <p class="mb-1"><strong><?= htmlspecialchars($prenomClair . ' ' . $nomClair); ?></strong></p>
+                <p class="mb-1 text-muted small">@<?= htmlspecialchars($client['pseudo'] ?? ''); ?></p>
+                <p class="mb-1 text-muted"><?= htmlspecialchars($mailClair); ?></p>
+                <p class="mb-3 text-muted"><?= htmlspecialchars($telClair); ?></p>
             </div>
 
             <div class="p-3 border rounded bg-white mt-3 small text-muted">
@@ -84,11 +84,11 @@ $telClair = !empty($client['telephone']) ? dechiffrer_donnee($client['telephone'
                     <div class="border rounded bg-white p-3 mb-3">
                         <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-2">
                             <div>
-                                <span class="fw-bold">Commande #<?php echo $cmd['noCommande']; ?></span>
-                                <span class="text-muted small ms-2"><?php echo htmlspecialchars($cmd['dateCommande']); ?></span>
+                                <span class="fw-bold">Commande #<?= $cmd['noCommande']; ?></span>
+                                <span class="text-muted small ms-2"><?= htmlspecialchars($cmd['dateCommande']); ?></span>
                             </div>
                             <span class="badge bg-light text-dark border">
-                                <?php echo htmlspecialchars($cmd['libelleStatut'] ?? 'En cours'); ?>
+                                <?= htmlspecialchars($cmd['libelleStatut'] ?? 'En cours'); ?>
                             </span>
                         </div>
 
@@ -98,15 +98,15 @@ $telClair = !empty($client['telephone']) ? dechiffrer_donnee($client['telephone'
                                 $total += $sousTotal;
                             ?>
                                 <div class="d-flex justify-content-between py-1 text-muted">
-                                    <span><?php echo htmlspecialchars($art['nomProduit']); ?> × <?php echo $art['quantite']; ?></span>
-                                    <span><?php echo number_format($sousTotal, 2, ',', ' '); ?> €</span>
+                                    <span><?= htmlspecialchars($art['nomProduit']); ?> × <?= $art['quantite']; ?></span>
+                                    <span><?= number_format($sousTotal, 2, ',', ' '); ?> €</span>
                                 </div>
                             <?php endforeach; ?>
                         </div>
 
                         <div class="d-flex justify-content-between pt-2 mt-2 border-top fw-bold">
                             <span>Total</span>
-                            <span class="text-danger"><?php echo number_format($total, 2, ',', ' '); ?> €</span>
+                            <span class="text-danger"><?= number_format($total, 2, ',', ' '); ?> €</span>
                         </div>
                     </div>
                 <?php endforeach; ?>

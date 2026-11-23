@@ -32,10 +32,10 @@ $resultat = $reponse->fetchAll();
         <?php foreach ($resultat as $user) {
         ?>
             <tr>
-                <td><?php echo $user['login'] ?></td>
-                <td><?php echo dechiffrer_donnee($user['nom'], $cle_chiffrement) ?></td>
-                <td><?php echo dechiffrer_donnee($user['prenom'], $cle_chiffrement) ?></td>
-                <td><?php echo $user['role'] ?></td>
+                <td><?= $user['login'] ?></td>
+                <td><?= dechiffrer_donnee($user['nom'], $cle_chiffrement) ?></td>
+                <td><?= dechiffrer_donnee($user['prenom'], $cle_chiffrement) ?></td>
+                <td><?= $user['role'] ?></td>
             </tr>
         <?php } ?>
     </tbody>

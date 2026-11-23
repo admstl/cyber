@@ -23,7 +23,7 @@ if (!$produit) {
         <!-- IMAGE -->
         <div class="col-md-6">
             <div class="card shadow border-0">
-                <img style="max-height: 450px; object-fit: contain;" src="./images/<?php echo htmlspecialchars($produit["nomImage"]); ?>" 
+                <img style="max-height: 450px; object-fit: contain;" src="./images/<?= htmlspecialchars($produit["nomImage"]); ?>" 
                      class="img-fluid rounded"
                      style="max-height: 450px; object-fit: cover;"
                      alt="Image produit">
@@ -33,22 +33,23 @@ if (!$produit) {
         <div class="col-md-6">
             <!-- Affichage du nom du produit-->
             <h1 class="fw-bold">
-                <?php echo htmlspecialchars($produit["nomProduit"]); ?>
+                <?= htmlspecialchars($produit["nomProduit"]); ?>
             </h1>
             <!-- Affichage du prix du produit-->
             <h2 class="text-success mt-3">
-                <?php echo number_format($produit["prixUnitaire"], 2, ',', ' '); ?> €
+                <?= number_format($produit["prixUnitaire"], 2, ',', ' '); ?> €
             </h2>
             <!-- Affichage du description du produit-->
             <p class="mt-3 text-muted">
-                <?php echo nl2br(htmlspecialchars($produit["descriptif"])); ?>
+                <?= nl2br(htmlspecialchars($produit["descriptif"])); ?>
             </p>
             <!-- Affichage si le produit et en stock ou non -->
             <?php if ($produit["stock"] > 0) { ?>
                 <p class="text-success">
-                    En stock (<?php echo $produit["stock"]; ?> disponibles)
+                    En stock (<?= $produit["stock"]; ?> disponibles)
                 </p>
-            <?php } else { ?>
+            <?php } 
+            else { ?>
                 <p class="text-danger">
                     Rupture de stock
                 </p>
@@ -56,7 +57,7 @@ if (!$produit) {
 
             <div class="mt-4 d-flex gap-2">
 
-                <a href="panier_action.php?action=ajouter&id=<?php echo $produit['numProduit']; ?>" class="btn btn-danger <?php echo ($produit['stock'] == 0) ? 'disabled' : ''; ?>">
+                <a href="panier_action.php?action=ajouter&id=<?= $produit['numProduit']; ?>" class="btn btn-danger <?= ($produit['stock'] == 0) ? 'disabled' : ''; ?>">
                     Ajout au Panier
                 </a>
 

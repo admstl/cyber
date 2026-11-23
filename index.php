@@ -20,8 +20,5 @@ if (!file_exists($page . ".php")) {
 
 include("head.php");
 include($page . ".php");
-?>
 
-<?php
 include("footer.php");
-?>

@@ -22,10 +22,8 @@
     ?>
         <div class="alert alert-warning role=alert">
             <!-- htmlspecialchars empêche l'injection de code dans la page (faille XSS) -->
-            <?php echo htmlspecialchars($erreur) ?>
+            <?= htmlspecialchars($erreur) ?>
         </div>
-    <?php
-    }
-    ?>
+    <?php } ?>
 
 </form>

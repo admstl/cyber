@@ -19,11 +19,11 @@ $liste_produits = $reponse->fetchAll(PDO::FETCH_ASSOC);
         foreach ($liste_produits as $produit) { ?>
             <div class="col-md-4">
                 <div class="card h-100 shadow-sm">
-                    <img src="./images/<?php echo htmlspecialchars($produit['nomImage']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($produit['nomProduit']); ?>">
+                    <img src="./images/<?= htmlspecialchars($produit['nomImage']); ?>" class="card-img-top" alt="<?= htmlspecialchars($produit['nomProduit']); ?>">
                     <div class="card-body text-center">
-                        <h5 class="card-title"><?php echo htmlspecialchars($produit['nomProduit']); ?></h5>
-                        <p class="text-success fw-bold"><?php echo number_format($produit['prixUnitaire'], 2, ',', ' '); ?> €</p>
-                        <a href="index.php?page=detailproduit&numProduit=<?php echo $produit['numProduit']; ?>" class="btn btn-danger">Voir Produit</a>
+                        <h5 class="card-title"><?= htmlspecialchars($produit['nomProduit']); ?></h5>
+                        <p class="text-success fw-bold"><?= number_format($produit['prixUnitaire'], 2, ',', ' '); ?> €</p>
+                        <a href="index.php?page=detailproduit&numProduit=<?= $produit['numProduit']; ?>" class="btn btn-danger">Voir Produit</a>
                     </div>
                 </div>
             </div>

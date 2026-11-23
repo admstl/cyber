@@ -46,19 +46,19 @@ if (!empty($panier)) {
                     $total += $sousTotal; ?>
                     <tr>
                         <td>
-                            <strong><?php echo htmlspecialchars($p['nomProduit']); ?></strong>
+                            <strong><?= htmlspecialchars($p['nomProduit']); ?></strong>
                         </td>
-                        <td><?php echo number_format($p['prixUnitaire'], 2, ',', ' '); ?> €</td>
+                        <td><?= number_format($p['prixUnitaire'], 2, ',', ' '); ?> €</td>
                         <td>
                             <div class="d-flex align-items-center gap-2">
-                                <a href="panier_action.php?action=moins&id=<?php echo $p['numProduit']; ?>" class="btn btn-sm btn-secondary">-</a>
-                                <span class="fw-bold"><?php echo $qte; ?></span>
-                                <a href="panier_action.php?action=ajouter&id=<?php echo $p['numProduit']; ?>" class="btn btn-sm btn-secondary">+</a>
+                                <a href="panier_action.php?action=moins&id=<?= $p['numProduit']; ?>" class="btn btn-sm btn-secondary">-</a>
+                                <span class="fw-bold"><?= $qte; ?></span>
+                                <a href="panier_action.php?action=ajouter&id=<?= $p['numProduit']; ?>" class="btn btn-sm btn-secondary">+</a>
                             </div>
                         </td>
-                        <td><?php echo number_format($sousTotal, 2, ',', ' '); ?> €</td>
+                        <td><?= number_format($sousTotal, 2, ',', ' '); ?> €</td>
                         <td>
-                            <a href="panier_action.php?action=supprimer&id=<?php echo $p['numProduit']; ?>" class="btn btn-sm btn-danger">Supprimer</a>
+                            <a href="panier_action.php?action=supprimer&id=<?= $p['numProduit']; ?>" class="btn btn-sm btn-danger">Supprimer</a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -66,11 +66,10 @@ if (!empty($panier)) {
             <tfoot>
                 <tr>
                     <th colspan="3" class="text-end">Total général :</th>
-                    <th colspan="2" class="text-success fs-5"><?php echo number_format($total, 2, ',', ' '); ?> €</th>
+                    <th colspan="2" class="text-success fs-5"><?= number_format($total, 2, ',', ' '); ?> €</th>
                 </tr>
             </tfoot>
         </table>
-
         <div class="d-flex justify-content-between mt-4">
             <a href="panier_action.php?action=vider" class="btn btn-outline-secondary">Vider le panier</a>
             <a href="panier_action.php?action=valider" class="btn btn-success btn-lg">Valider la commande</a>

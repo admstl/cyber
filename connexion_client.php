@@ -7,7 +7,7 @@
         <!-- Affiche le message d'erreur envoyé par connexion_client_exe.php -->
         <?php if (isset($_GET["erreur"])) { ?>
             <div class="alert alert-warning" role="alert">
-                <?php echo htmlspecialchars($_GET["erreur"]); ?>
+                <?= htmlspecialchars($_GET["erreur"]); ?>
             </div>
         <?php } ?>
 

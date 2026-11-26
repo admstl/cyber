@@ -5,7 +5,7 @@ require_once("validation.php");
 // Fonctions d'écriture dans le journal
 require_once("journal.php");
 
-// Journalise l'échec avec la raison (visible uniquement dans les logs), puis renvoie l'utilisateur vers le formulaire
+// Journalise l'échec avec la raison (visible uniquement dans les logs) puis renvoie l'utilisateur vers le formulaire
 // L'utilisateur voit toujours le même message : on ne lui révèle pas la raison
 function retour_connexion_client(string $raison, string $pseudo = ""): void
 {
@@ -27,7 +27,7 @@ $mdp = $_POST["mdp"];
 // Vérifications avant l'envoi à la base de données
 // Message volontairement identique à un échec classique on ne révèle pas la règle
 if (!valider_pseudo($pseudo) || $mdp === "" || strlen($mdp) > 128) {
-    // Le pseudo n'est pas écrit dans le journal : il est invalide, il pourrait contenir n'importe quoi
+    // Le pseudo n'est pas écrit dans le journal il est invalide il pourrait contenir n'importe quoi
     retour_connexion_client("donnees_invalides");
 }
 
@@ -39,7 +39,7 @@ try {
     $stmt->execute([$pseudo]);
     $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Le pseudo n'existe pas : on le note pour le journal
+    // Le pseudo n'existe pas on le note pour le journal
     if (!$resultat) {
         $raison = "compte_inexistant";
     }
@@ -57,10 +57,10 @@ try {
         exit();
     }
 } catch (Throwable $e) {
-    // Erreur de la base de données : le détail est écrit dans le journal, l'utilisateur ne le voit pas
+    // Erreur de la base de données le détail est écrit dans le journal l'utilisateur ne le voit pas
     journaliser("ERROR", "CONNEXION_CLIENT", "ERREUR_BDD " . nettoyer_log($e->getMessage(), 200));
     $raison = "erreur_technique";
 }
 
-// La connexion a échoué : on journalise l'échec avec la raison
+// La connexion a échoué on journalise l'échec avec la raison
 retour_connexion_client($raison, $pseudo);

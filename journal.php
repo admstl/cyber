@@ -1,5 +1,5 @@
 <?php
-// Dossier des journaux : défini une seule fois dans le .env (LOG_DIR), avec une valeur par défaut
+// Dossier des journaux : défini une seule fois dans le .env (LOG_DIR) avec une valeur par défaut
 function dossier_logs(): string
 {
     $dossier = getenv('LOG_DIR');
@@ -15,16 +15,15 @@ function nettoyer_log(string $valeur, int $max = 60): string
 
 // Écrit une ligne dans le journal de l'application
 // Format : [date heure] [NIVEAU] [EVENEMENT] ip=adresse message
-// Exemple : [2026-11-24 14:03:12] [INFO] [CONNEXION_CLIENT] ip=10.0.0.5 SUCCES pseudo=achille01 idClient=4
 function journaliser(string $niveau, string $evenement, string $message): void
 {
     $ip = nettoyer_log($_SERVER['REMOTE_ADDR'] ?? 'inconnue', 45);
     $ligne = '[' . date('Y-m-d H:i:s') . '] [' . $niveau . '] [' . $evenement . '] ip=' . $ip . ' ' . $message . PHP_EOL;
 
-    // Un fichier par jour : application-AAAA-MM-JJ.log
+    // Un fichier par jour application-AAAA-MM-JJ.log
     $fichier = dossier_logs() . '/application-' . date('Y-m-d') . '.log';
 
-    // Type 3 : écrit dans le fichier indiqué. Si c'est impossible (dossier absent ou droits), on retombe sur le journal PHP
+    // Ecrire dans le fichier indiqué. Si c'est impossible (dossier absent ou droits), on retombe sur le journal PHP
     if (@error_log($ligne, 3, $fichier) === false) {
         error_log(trim($ligne));
     }
